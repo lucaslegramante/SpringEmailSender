@@ -2,6 +2,7 @@ package org.example.springemailsender.boundaries.controllers
 
 import org.example.springemailsender.core.application.EmailRequest
 import org.example.springemailsender.core.application.EmailSenderUseCase
+import org.example.springemailsender.core.application.exceptions.EmailServiceException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller

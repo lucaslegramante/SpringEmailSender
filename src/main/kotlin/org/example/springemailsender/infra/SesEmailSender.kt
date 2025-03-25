@@ -9,6 +9,7 @@ import com.amazonaws.services.simpleemail.model.Message
 import com.amazonaws.services.simpleemail.model.SendEmailRequest
 import org.example.springemailsender.core.application.EmailRequest
 import org.example.springemailsender.core.application.EmailSenderUseCase
+import org.example.springemailsender.core.application.exceptions.EmailServiceException
 import org.springframework.stereotype.Service
 
 @Service
