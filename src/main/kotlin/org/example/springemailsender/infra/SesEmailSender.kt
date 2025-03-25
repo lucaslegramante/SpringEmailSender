@@ -13,22 +13,28 @@ import org.springframework.stereotype.Service
 
 @Service
 class SesEmailSender(
-    private val amazonSimpleEmailService: AmazonSimpleEmailService
+    private val amazonSimpleEmailService: AmazonSimpleEmailService,
 ) : EmailSenderGateway {
-    override fun sendEmail(to: String, subject: String, body: String) {
-        val request = SendEmailRequest().withSource(
-            "lucaslegramante@gmail.com"
-        ).withDestination(
-            Destination()
-                .withToAddresses(to)
-        ).withMessage(
-            Message()
-                .withSubject(Content(subject))
-                .withBody(
-                    Body()
-                        .withText(Content(body))
+    override fun sendEmail(
+        to: String,
+        subject: String,
+        body: String,
+    ) {
+        val request =
+            SendEmailRequest()
+                .withSource(
+                    "lucaslegramante@gmail.com",
+                ).withDestination(
+                    Destination()
+                        .withToAddresses(to),
+                ).withMessage(
+                    Message()
+                        .withSubject(Content(subject))
+                        .withBody(
+                            Body()
+                                .withText(Content(body)),
+                        ),
                 )
-        )
 
         try {
             amazonSimpleEmailService.sendEmail(request)

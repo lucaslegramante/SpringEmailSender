@@ -15,13 +15,13 @@ class AwsSesConfig(
     @Value("\${aws.accessKey}")
     private val accessKey: String,
     @Value("\${aws.secretKey}")
-    private val secretKey: String
+    private val secretKey: String,
 ) {
-
     @Bean
     fun amazonSimpleEmailService(): AmazonSimpleEmailService {
         val awsCredentials = BasicAWSCredentials(accessKey, secretKey)
-        return AmazonSimpleEmailServiceClientBuilder.standard()
+        return AmazonSimpleEmailServiceClientBuilder
+            .standard()
             .withRegion(region)
             .withCredentials(AWSStaticCredentialsProvider(awsCredentials))
             .build()

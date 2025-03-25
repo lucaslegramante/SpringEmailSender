@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 class EmailSenderController(
     private val emailSenderUseCase: EmailSenderUseCase,
 ) {
-
     @PostMapping("/send")
     fun sendEmail(
         @RequestBody emailRequest: EmailRequest,
     ): ResponseEntity<String> {
         try {
             emailSenderUseCase.sendEmail(
-                emailRequest
+                emailRequest,
             )
             return ResponseEntity.ok("Email sent successfully")
         } catch (e: EmailServiceException) {
