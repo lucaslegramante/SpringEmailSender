@@ -7,25 +7,27 @@ import com.amazonaws.services.simpleemail.model.Content
 import com.amazonaws.services.simpleemail.model.Destination
 import com.amazonaws.services.simpleemail.model.Message
 import com.amazonaws.services.simpleemail.model.SendEmailRequest
-import org.example.springemailsender.core.application.EmailRequest
-import org.example.springemailsender.core.application.EmailSenderUseCase
 import org.example.springemailsender.core.application.exceptions.EmailServiceException
+import org.example.springemailsender.core.domain.EmailSenderGateway
 import org.springframework.stereotype.Service
 
 @Service
 class SesEmailSender(
     private val amazonSimpleEmailService: AmazonSimpleEmailService
-) : EmailSenderUseCase {
-    override fun sendEmail(emailRequest: EmailRequest) {
+) : EmailSenderGateway {
+    override fun sendEmail(to: String, subject: String, body: String) {
         val request = SendEmailRequest().withSource(
             "lucaslegramante@gmail.com"
         ).withDestination(
             Destination()
-                .withToAddresses(emailRequest.to)
+                .withToAddresses(to)
         ).withMessage(
             Message()
-                .withSubject(Content(emailRequest.subject))
-                .withBody(Body(Content(emailRequest.body)))
+                .withSubject(Content(subject))
+                .withBody(
+                    Body()
+                        .withText(Content(body))
+                )
         )
 
         try {
